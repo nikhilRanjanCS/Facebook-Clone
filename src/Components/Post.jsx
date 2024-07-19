@@ -24,7 +24,7 @@ const Post = () => {
       {/* if any image */}
       <div className="relative h-60 md:h-96 bg-white">
         <img
-          src="https://www.facebook.com/photo?fbid=498277909417722&set=a.176193884959461https://cdn.pixabay.com/photo/2014/08/26/21/48/dollars-428047_960_720.jpg"
+          src="https://images.pexels.com/photos/8474484/pexels-photo-8474484.jpeg?auto=compress&cs=tinysrgb&w=600"
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>

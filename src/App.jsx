@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import SideBar from "./Components/SideBar";
 import Login from "./Components/Login";
 import Feed from "./Components/Feed";
+import RightSideBar from "./Components/RightSideBar";
 
 function App() {
   const { currentUser } = useAuth();
@@ -19,7 +20,7 @@ function App() {
       <main className="flex bg-gray-100">
         <SideBar />
         <Feed />
-        {/* right sidebar */}
+        <RightSideBar />
       </main>
     </>
   );
