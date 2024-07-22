@@ -3,8 +3,11 @@ import { AuthContext } from "../AuthContext";
 import { HiOutlineVideoCamera } from "react-icons/hi";
 import { IoMdPhotos } from "react-icons/io";
 import { BsEmojiSmile } from "react-icons/bs";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import axios from "axios";
 
 const CreatePost = () => {
+  const FACEBOOK_CLONE_ENDPOINT = "";
   const { currentUser } = useContext(AuthContext);
   const inputRef = useRef(null);
   const hiddenFileInputRef = useRef(null);
@@ -20,6 +23,31 @@ const CreatePost = () => {
         setImageToPost(e.target.result);
       };
     }
+  };
+  const removeImage = () => {
+    setImageToPost(null);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!inputRef.current.value) return;
+    const postFormData = new FormData();
+    postFormData.append("file", imageToPost);
+    postFormData.append("postText", inputRef.current.value);
+    postFormData.append("username", currentUser.displayName);
+    postFormData.append("email", currentUser.email);
+    postFormData.append("profilePic", currentUser.photoURL);
+
+    axios
+      .post(FACEBOOK_CLONE_ENDPOINT, postFormData, {
+        headers: { Accept: "application/json" },
+      })
+      .then(() => {
+        inputRef.current.value = "";
+        removeImage();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="bg-white rounded-md shadow-md text-gray-500 p-2">
@@ -39,14 +67,18 @@ const CreatePost = () => {
             placeholder={`What's on your mind, ${
               currentUser.displayName.split(" ")[0]
             } ?`}
-            inputRef={inputRef}
+            ref={inputRef}
           />
-          <button hidden></button>
+          <button hidden onClick={handleSubmit}></button>
         </form>
       </div>
       {imageToPost && (
-        <div className="flex items-center px-4 py-2 space-x-4 filter hover:brightness-110 transition duration-150 cursor-pointer">
+        <div
+          className="flex items-center px-4 py-2 space-x-4 filter hover:brightness-110 transition duration-150 cursor-pointer"
+          onClick={removeImage}
+        >
           <img src={imageToPost} className="h-10 object-contain" />
+          <RiDeleteBin6Line className="h-8 hover:text-red-500" />
         </div>
       )}
       <div className="flex justify-evenly py-2">
