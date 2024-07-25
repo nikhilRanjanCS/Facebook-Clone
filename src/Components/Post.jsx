@@ -3,31 +3,28 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { PiShareFatThin } from "react-icons/pi";
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" key={post.id}>
       <div className="bg-white mt-6 rounded-md p-4">
         <div className="flex items-center space-x-2">
-          <img
-            className="rounded-full w-10 h-10"
-            src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png"
-          />
+          <img className="rounded-full w-10 h-10" src={post.profilePic} />
           <div className="">
-            <p className="font-medium">Nikhil Ranjan</p>
-            <p className="text-xs text-gray-500">
-              {new Date().toLocaleString()}
-            </p>
+            <p className="font-medium">{post.name}</p>
+            <p className="text-xs text-gray-500">{post.timeStamp}</p>
           </div>
         </div>
-        <p className="py-4">Lorem ipsum</p>
+        <p className="py-4">{post.post}</p>
       </div>
       {/* if any image */}
-      <div className="relative h-60 md:h-96 bg-white">
-        <img
-          src="https://images.pexels.com/photos/8474484/pexels-photo-8474484.jpeg?auto=compress&cs=tinysrgb&w=600"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
+      {post.image != null && (
+        <div className="relative h-60 md:h-96 bg-white">
+          <img
+            src={post.image}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      )}
       <div className="flex items-center justify-center bg-white p-2">
         <div className="flex items-center space-x-1 hover:bg-gray-100 flex-grow justify-center p-2 rounded-xl cursor-pointer">
           <AiOutlineLike className="h-6" />
