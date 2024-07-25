@@ -16,9 +16,12 @@ const Posts = () => {
     };
     fetchData();
   }, []);
+  const sortedPosts = [...posts].sort((a, b) => {
+    return new Date(b.timeStamp) - new Date(a.timeStamp);
+  });
   return (
     <>
-      {posts.map((post) => (
+      {sortedPosts.map((post) => (
         <Post post={post} key={post.id} />
       ))}
     </>

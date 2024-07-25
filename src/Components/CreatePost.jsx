@@ -46,7 +46,6 @@ const CreatePost = () => {
       })
       .then((response) => {
         inputRef.current.value = "";
-        console.log(response);
         dispatch(addPost(response.data));
         removeImage();
       })
@@ -65,7 +64,7 @@ const CreatePost = () => {
           width={40}
           className="rounded-full cursor-pointer"
         />
-        <form className="flex flex-1" encype="multipart/form-data">
+        <form className="flex flex-1" encType="multipart/form-data">
           <input
             className="rounded-full h-12 flex-grow font-medium focus:outline-none bg-gray-100 px-4"
             type="text"
